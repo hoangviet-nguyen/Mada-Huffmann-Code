@@ -1,12 +1,35 @@
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class main {
+    public static IOhelper iohelper = new IOhelper();
 
     public static void main(String[] args) {
 
-        int n = 4;
-        char[] charArray = {' ', 'B', 'C', 'D'};
-        int[] charfreq = {5, 1, 6, 3};
+
+        HashMap<Character,Integer> table = new HashMap<>();
+        String text = iohelper.readFile("text.txt");
+
+        for (char c: text.toCharArray()) {
+            table.put(c, table.getOrDefault(c,0)+1);
+        }
+        int n = table.size();
+        char[] charArray = new char[table.size()];
+        int[] charfreq = new int[table.size()];
+        int index = 0;
+        for (Character c : table.keySet()) {
+            charArray[index] = c;
+            index++;
+        }
+
+        index = 0;
+        for (Integer value : table.values()) {
+            charfreq[index] = value;
+            index++;
+        }
+
+
 
         PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new NodeComparator());
 
