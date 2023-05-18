@@ -6,34 +6,15 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class main {
-    public static IOhelper iohelper = new IOhelper();
 
     public static void main(String[] args) {
 
 
-        HashMap<Character,Integer> table = new HashMap<>();
-        String text = iohelper.readFile("text.txt");
-
-        for (char c: text.toCharArray()) {
-            table.put(c, table.getOrDefault(c,0)+1);
-        }
+        HashMap<Character,Integer> table = CalcHelper.occurenceTable("text.txt");
+        String text = IOhelper.readFile("text.txt");
         int n = table.size();
-        char[] charArray = new char[table.size()];
-        int[] charfreq = new int[table.size()];
-        Arrays.sort(charfreq);
-        int index = 0;
-        for (Character c : table.keySet()) {
-            charArray[index] = c;
-            index++;
-        }
-
-        index = 0;
-        for (Integer value : table.values()) {
-            charfreq[index] = value;
-            index++;
-        }
-
-
+        char[] charArray = CalcHelper.getCharArr(table);
+        int[] charfreq = CalcHelper.getCharFreq(table);
 
         PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new NodeComparator());
 
@@ -79,7 +60,7 @@ public class main {
              System.out.println(c + "   |  " + codeTable.get(c));
              decTable +=  (int)c +":" + codeTable.get(c)+"-";
          }
-        iohelper.writeFile(decTable.substring(0, decTable.length()-1),"dec tab.txt");
+        IOhelper.writeFile(decTable.substring(0, decTable.length()-1),"dec tab.txt");
          String output = "";
             for (char c: text.toCharArray()) {
                 output += codeTable.get(c);
@@ -91,7 +72,7 @@ public class main {
                 output = output + "0";
             }
         System.out.println("Encoded: " + output);
-            iohelper.writeFile(output,"encoded.txt");
+            IOhelper.writeFile(output,"encoded.txt");
 
         byte[] bytes = new byte[output.length()/8];
         for (int i = 0; i < output.length(); i+=8) {
@@ -100,9 +81,14 @@ public class main {
         }
 
         System.out.println("Encoded: " + Arrays.toString(bytes));
-
-        iohelper.writeByteToFile(bytes);
-
+        String binaryString = "";
+        IOhelper.writeByteToFile(bytes);
+        for (byte b: bytes) {
+            binaryString += Integer.toBinaryString((b& 0xFF)+ 0x100).substring(1);
+        }
+        System.out.println("Encoded: " + binaryString);
+        String test = Huffman.getString(root, binaryString);
+        System.out.println("Decoded: " + test);
 
     }
 }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class IOhelper {
 
-    public String readFile(String path){
+    public static String readFile(String path){
         String text = "";
         try {
             Scanner reader = null;
@@ -28,7 +28,7 @@ public class IOhelper {
         return text;
     }
 
-    public Boolean writeFile(String text, String path){
+    public static boolean writeFile(String text, String path){
         try {
             java.io.FileWriter myWriter = new java.io.FileWriter(path);
             myWriter.write(text);
@@ -40,7 +40,7 @@ public class IOhelper {
         }
     }
 
-    public void writeByteToFile (byte[] array){
+    public static  void writeByteToFile (byte[] array){
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream("output.dat");
@@ -54,7 +54,7 @@ public class IOhelper {
         }
     }
 
-    public byte[] readByte () {
+    public static byte[] readByte () {
         File file = new File("output.dat");
         byte[] bFile = new byte[(int) file.length()];
         FileInputStream fis = null;
