@@ -8,7 +8,7 @@ public class main {
     public static void main(String[] args) {
 
         //berechnet die Wahrscheinlichkeiten
-        Map<Character,Integer> table = CalcHelper.occurenceTable("text.txt");
+        Map<Character, Integer> table = CalcHelper.occurenceTable("text.txt");
         String text = IOhelper.readFile("text.txt");
         int n = table.size();
         char[] charArray = CalcHelper.getCharArr(table);
@@ -56,7 +56,7 @@ public class main {
 
         Map<Character, String> codeTable = Huffman.printCode(root, "", new HashMap<>());
 
-        IOhelper.writeTable("dec tab.txt",codeTable);
+        IOhelper.writeTable("dec tab.txt", codeTable);
 
         String output = "";
         for (char c : text.toCharArray()) {
@@ -86,7 +86,7 @@ public class main {
         binaryString = IOhelper.convertToString(bytes);
         System.out.println(binaryString);
         Map<String, Character> mapper = IOhelper.getTableFromFile("dec_tab-mada.txt");
-        String test = Huffman.decode(mapper,binaryString);
+        String test = Huffman.decode(mapper, binaryString);
         System.out.println("Decoded: " + test);
         System.out.println("Mit Huffman verfahren: " + decoded);
         System.out.println("Ohne Huffman verfahren: " + CalcHelper.originalBytes(test));

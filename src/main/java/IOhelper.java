@@ -3,7 +3,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class IOhelper {
 
@@ -85,7 +90,6 @@ public class IOhelper {
     }
 
 
-
     public static void writeTable(String path, Map<Character, String> codeTable) {
         String decTable = "";
         for (Character c : codeTable.keySet()) {
@@ -98,13 +102,13 @@ public class IOhelper {
         String code = readFile(codeTable);
         List<String> mapper = Arrays.stream(code.split("-")).toList();
         List<List<String>> raw = new ArrayList<>();
-        for (String pair:mapper) {
+        for (String pair : mapper) {
             raw.add(Arrays.stream(pair.split(":")).toList());
         }
 
         Map<String, Character> codePoint = new HashMap<>();
         for (List pair : raw) {
-            codePoint.put((String)pair.get(1), (char) Integer.parseInt((String)pair.get(0)));
+            codePoint.put((String) pair.get(1), (char) Integer.parseInt((String) pair.get(0)));
         }
         return codePoint;
     }

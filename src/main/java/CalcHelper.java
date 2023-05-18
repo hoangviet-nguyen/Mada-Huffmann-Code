@@ -4,7 +4,6 @@ import java.util.Map;
 public class CalcHelper {
 
     /**
-     *
      * @param file Datei pfad aus dem der Text gelesen wird
      * @return Anzahl Vorkommnisse werden auf die Zeichen gemapped
      */
@@ -19,7 +18,6 @@ public class CalcHelper {
     }
 
     /**
-     *
      * @param table Zeichen und ihre Anzahl im Text
      * @return Frequenz der Buchstaben im einem Array
      */
@@ -34,7 +32,6 @@ public class CalcHelper {
     }
 
     /**
-     *
      * @param table Zeichen und ihre Anzahl im Text
      * @return Einzelne Zeichen im Array
      */
@@ -49,7 +46,6 @@ public class CalcHelper {
     }
 
     /**
-     *
      * @param text text aus dem gelesen wird
      * @return Anzahl Bytes die für den text benutz wurden
      */

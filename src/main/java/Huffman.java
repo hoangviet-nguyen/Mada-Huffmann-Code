@@ -1,13 +1,11 @@
-import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
 public class Huffman {
 
     /**
-     *
-     * @param root root node of the Huffman tree
-     * @param s builds codePoint String of the characters
+     * @param root  root node of the Huffman tree
+     * @param s     builds codePoint String of the characters
      * @param table Map characters to occurences
      * @return return a Map with characters and Codepoint
      */
@@ -23,9 +21,8 @@ public class Huffman {
     }
 
     /**
-     *
      * @param table Map codePoint to character
-     * @param code with Huffman encoded String
+     * @param code  with Huffman encoded String
      * @return decoded value of the the code
      */
     public static String decode(Map<String, Character> table, String code) {
@@ -42,16 +39,15 @@ public class Huffman {
     }
 
     /**
-     *
-     * @param charfreq Array with frequencies of charactes
+     * @param charfreq  Array with frequencies of charactes
      * @param charArray Array with all distinct characters in text
      * @return root Huffman Node
      */
-    public static HuffmanNode treeGenerator(int [] charfreq, char[] charArray) {
+    public static HuffmanNode treeGenerator(int[] charfreq, char[] charArray) {
         int n = charArray.length;
         PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new NodeComparator());
 
-        for (int i = 0; i <n; i++) {
+        for (int i = 0; i < n; i++) {
 
             HuffmanNode hn = new HuffmanNode();
             hn.c = charArray[i];
