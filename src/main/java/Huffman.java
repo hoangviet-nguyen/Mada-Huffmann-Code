@@ -1,15 +1,19 @@
+import java.util.HashMap;
+
 public class Huffman {
 
-    // Implementing the huffman algorithm
-        public static void printCodeTable(HuffmanNode root, String s) {
+    // IMplementing the huffman algorithm
+        public static HashMap<Character,String> printCode(HuffmanNode root, String s, HashMap<Character, String> table) {
             if (root.left == null && root.right == null) {
 
-                System.out.println(root.c + "   |  " + s);
+                //System.out.println(root.c + "   |  " + s);
+                table.put(root.c, (s));
 
-                return;
+                return table;
             }
-            printCodeTable(root.left, s + "0");
-            printCodeTable(root.right, s + "1");
+            printCode(root.left, s + "0",table);
+            printCode(root.right, s + "1",table);
+            return table;
         }
 
         public static char getChar(HuffmanNode root,  char code) {

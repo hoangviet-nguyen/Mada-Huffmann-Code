@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -68,8 +70,42 @@ public class main {
 
             q.add(f);
         }
-        System.out.println(" Char | Huffman code ");
+        System.out.println(" Charakter | Codepoint ");
         System.out.println("--------------------");
-        Huffman.printCodeTable(root, "");
+         HashMap<Character,String> codeTable = Huffman.printCode(root, "",new HashMap<>());
+         String decTable = "";
+         for (Character c: codeTable.keySet()) {
+             System.out.println(c + "   |  " + codeTable.get(c));
+             decTable +=  (int)c +":" + codeTable.get(c)+"-";
+         }
+        iohelper.writeFile(decTable.substring(0, decTable.length()-1),"dec tab.txt");
+         String output = "";
+            for (char c: text.toCharArray()) {
+                output += codeTable.get(c);
+            }
+
+        System.out.println("Encoded: " + output);
+            output = output + "1";
+            while (output.length() % 8 != 0) {
+                output = output + "0";
+            }
+        System.out.println("Encoded: " + output);
+            iohelper.writeFile(output,"encoded.txt");
+
+        Byte[] bytes = new Byte[output.length()/8];
+
+        System.out.println(bytes[2]);
+        /*
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream("output.dat");
+            fos.write(bytes);
+            fos.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }*/
+
+
+
     }
 }
