@@ -1,9 +1,8 @@
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.PriorityQueue;
 
-public class main {
+
+public class MainApp {
 
     public static void main(String[] args) {
 
@@ -16,11 +15,12 @@ public class main {
         int[] charFreq = CalcHelper.getCharFreq(table);
         HuffmanNode root = Huffman.treeGenerator(charFreq, charArray);
 
-        //Generating code table
+        //Generating code table & encode text
         Map<Character, String> codeTable = Huffman.printCode( root, "", new HashMap<>());
         IOhelper.writeTable("dec tab.txt",codeTable);
         String output = Huffman.encode(text, codeTable);
 
+        //saving the encoded text in byte array
         byte[] bytes = new byte[output.length() / 8];
         for (int i = 0; i < output.length(); i += 8) {
             String byteString = output.substring(i, i + 8);
@@ -35,6 +35,7 @@ public class main {
         String binaryString = IOhelper.convertToString(bytes);
         Map<String, Character> mapper = IOhelper.getTableFromFile("dec_tab-mada.txt");
         String test = Huffman.decode(mapper, binaryString);
+
         System.out.println("Decoded: " + test);
         System.out.println("Mit Huffman verfahren: " + decoded);
         System.out.println("Ohne Huffman verfahren: " + CalcHelper.originalBytes(test));

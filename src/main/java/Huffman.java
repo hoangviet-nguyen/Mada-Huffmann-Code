@@ -10,13 +10,15 @@ public class Huffman {
      * @return return a Map with characters and Codepoint
      */
     public static Map<Character, String> printCode(HuffmanNode root, String s, Map<Character, String> table) {
-        if (root.left == null && root.right == null) {
-            table.put(root.c, (s));
 
+        if (root.left == null && root.right == null) {
+            table.put(root.c, s);
             return table;
         }
+
         printCode(root.left, s + "0", table);
         printCode(root.right, s + "1", table);
+
         return table;
     }
 
@@ -26,16 +28,19 @@ public class Huffman {
      * @return encoded String
      */
     public static String encode(String text, Map<Character, String> codeTable) {
+
         StringBuilder output = new StringBuilder();
 
         for (char c : text.toCharArray()) {
             output.append(codeTable.get(c));
         }
+
         output.append("1");
 
         while (output.length() % 8 != 0) {
             output.append("0");
         }
+
         return output.toString();
     }
 
@@ -45,8 +50,10 @@ public class Huffman {
      * @return decoded value of the code
      */
     public static String decode(Map<String, Character> table, String code) {
+
         StringBuilder decoded = new StringBuilder();
         String codepoint = "";
+
         for (char c : code.toCharArray()) {
             codepoint += c;
             if (table.containsKey(codepoint)) {
@@ -54,6 +61,7 @@ public class Huffman {
                 codepoint = "";
             }
         }
+
         return decoded.toString();
     }
 
@@ -63,11 +71,11 @@ public class Huffman {
      * @return root Huffman Node
      */
     public static HuffmanNode treeGenerator(int[] charfreq, char[] charArray) {
+
         int n = charArray.length;
-        PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new NodeComparator());
+        PriorityQueue<HuffmanNode> q = new PriorityQueue<>(n, new NodeComparator());
 
         for (int i = 0; i < n; i++) {
-
             HuffmanNode hn = new HuffmanNode();
             hn.c = charArray[i];
             hn.item = charfreq[i];
@@ -79,7 +87,6 @@ public class Huffman {
         HuffmanNode root = null;
 
         while (q.size() > 1) {
-
             HuffmanNode x = q.peek();
             q.poll();
             HuffmanNode y = q.peek();
@@ -91,8 +98,8 @@ public class Huffman {
             f.right = y;
             root = f;
             q.add(f);
-
         }
+
         return root;
     }
 
