@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -92,19 +93,15 @@ public class main {
         System.out.println("Encoded: " + output);
             iohelper.writeFile(output,"encoded.txt");
 
-        Byte[] bytes = new Byte[output.length()/8];
+        byte[] bytes = new byte[output.length()/8];
+        for (int i = 0; i < output.length(); i+=8) {
+            String byteString = output.substring(i,i+8);
+            bytes[i/8] = (byte)Integer.parseInt(byteString,2);
+        }
 
-        System.out.println(bytes[2]);
-        /*
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream("output.dat");
-            fos.write(bytes);
-            fos.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }*/
+        System.out.println("Encoded: " + Arrays.toString(bytes));
 
+        iohelper.writeByteToFile(bytes);
 
 
     }

@@ -1,5 +1,8 @@
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class IOhelper {
@@ -35,5 +38,33 @@ public class IOhelper {
             System.out.println("Fehler beim Schreiben der Datei");
             throw new RuntimeException(e);
         }
+    }
+
+    public void writeByteToFile (byte[] array){
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream("output.dat");
+            fos.write(array);
+            fos.close();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public byte[] readByte () {
+        File file = new File("output.dat");
+        byte[] bFile = new byte[(int) file.length()];
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+            fis.read(bFile);
+            fis.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return bFile;
     }
 }
