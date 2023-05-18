@@ -3,11 +3,11 @@ import java.util.HashMap;
 public class CalcHelper {
 
     public static HashMap<Character, Integer> occurenceTable(String file) {
-        HashMap<Character,Integer> table = new HashMap<>();
+        HashMap<Character, Integer> table = new HashMap<>();
         String text = IOhelper.readFile(file);
 
-        for (char c: text.toCharArray()) {
-            table.put(c, table.getOrDefault(c,0)+1);
+        for (char c : text.toCharArray()) {
+            table.put(c, table.getOrDefault(c, 0) + 1);
         }
         return table;
     }
