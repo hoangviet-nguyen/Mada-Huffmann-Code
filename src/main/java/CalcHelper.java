@@ -4,8 +4,9 @@ import java.util.Map;
 public class CalcHelper {
 
     /**
-     * @param file Datei pfad aus dem der Text gelesen wird
-     * @return Anzahl Vorkommnisse werden auf die Zeichen gemapped
+     *
+     * @param file path to read text from
+     * @return Map occurrences and characters
      */
     public static Map<Character, Integer> occurenceTable(String file) {
         HashMap<Character, Integer> table = new HashMap<>();
@@ -18,8 +19,9 @@ public class CalcHelper {
     }
 
     /**
-     * @param table Zeichen und ihre Anzahl im Text
-     * @return Frequenz der Buchstaben im einem Array
+     *
+     * @param table Map occurrences and characters
+     * @return frequency of characters in an Array
      */
     public static int[] getCharFreq(Map<Character, Integer> table) {
         int[] charfreq = new int[table.size()];
@@ -32,8 +34,9 @@ public class CalcHelper {
     }
 
     /**
-     * @param table Zeichen und ihre Anzahl im Text
-     * @return Einzelne Zeichen im Array
+     *
+     * @param table Map occurrences and characters
+     * @return all the distinct characters of the text in an Array
      */
     public static char[] getCharArr(Map<Character, Integer> table) {
         char[] charArray = new char[table.size()];
@@ -46,8 +49,9 @@ public class CalcHelper {
     }
 
     /**
-     * @param text text aus dem gelesen wird
-     * @return Anzahl Bytes die für den text benutz wurden
+     *
+     * @param text path to read text from
+     * @return number of bytes used for the text
      */
     public static int originalBytes(String text) {
         int numberOfBytes = 0;

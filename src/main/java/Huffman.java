@@ -5,7 +5,7 @@ public class Huffman {
 
     /**
      * @param root  root node of the Huffman tree
-     * @param s     builds codePoint String of the characters
+     * @param s builds codePoint String of the characters
      * @param table Map characters to occurences
      * @return return a Map with characters and Codepoint
      */
@@ -21,9 +21,28 @@ public class Huffman {
     }
 
     /**
+     * @param text text to encode
+     * @param codeTable Map codePoint and character
+     * @return encoded String
+     */
+    public static String encode(String text, Map<Character, String> codeTable) {
+        StringBuilder output = new StringBuilder();
+
+        for (char c : text.toCharArray()) {
+            output.append(codeTable.get(c));
+        }
+        output.append("1");
+
+        while (output.length() % 8 != 0) {
+            output.append("0");
+        }
+        return output.toString();
+    }
+
+    /**
      * @param table Map codePoint to character
-     * @param code  with Huffman encoded String
-     * @return decoded value of the the code
+     * @param code with Huffman encoded String
+     * @return decoded value of the code
      */
     public static String decode(Map<String, Character> table, String code) {
         StringBuilder decoded = new StringBuilder();
