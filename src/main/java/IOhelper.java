@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class IOhelper {
@@ -66,5 +67,14 @@ public class IOhelper {
             throw new RuntimeException(e);
         }
         return bFile;
+    }
+
+
+    public static void createCodeTable(String path, HashMap<Character, String> codeTable) {
+        String decTable = "";
+        for (Character c : codeTable.keySet()) {
+            decTable += (int) c + ":" + codeTable.get(c) + "-";
+        }
+        IOhelper.writeFile(decTable.substring(0, decTable.length() - 1), path);
     }
 }

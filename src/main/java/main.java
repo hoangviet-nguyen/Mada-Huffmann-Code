@@ -51,13 +51,11 @@ public class main {
         }
         System.out.println(" Charakter | Codepoint ");
         System.out.println("--------------------");
+
         HashMap<Character, String> codeTable = Huffman.printCode(root, "", new HashMap<>());
-        String decTable = "";
-        for (Character c : codeTable.keySet()) {
-            System.out.println(c + "   |  " + codeTable.get(c));
-            decTable += (int) c + ":" + codeTable.get(c) + "-";
-        }
-        IOhelper.writeFile(decTable.substring(0, decTable.length() - 1), "dec tab.txt");
+
+        IOhelper.createCodeTable("dec tab.txt",codeTable);
+
         String output = "";
         for (char c : text.toCharArray()) {
             output += codeTable.get(c);
