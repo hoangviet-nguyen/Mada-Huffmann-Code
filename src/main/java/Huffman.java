@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class Huffman {
     // IMplementing the huffman algorithm
@@ -13,23 +14,17 @@ public class Huffman {
         return table;
     }
 
-    public static String getString(HuffmanNode root, String code) {
-        HuffmanNode original = root;
-        StringBuilder decoded = new StringBuilder();
-        for (char c : code.toCharArray()) {
-            if (c == '0') {
-                root = root.left;
-            } else if (c == '1') {
-                root = root.right;
+        public static String decode(Map<String, Character> table, String code) {
+                StringBuilder decoded = new StringBuilder();
+                String codepoint = "";
+            for (char c : code.toCharArray()) {
+                codepoint += c;
+                if (table.containsKey(codepoint)) {
+                    decoded.append(table.get(codepoint));
+                    codepoint = "";
+                }
             }
-
-            if (root.left == null && root.right == null) {
-                decoded.append(root.c);
-                root = original;
-            }
+            return decoded.toString();
         }
-
-        return decoded.toString();
-    }
 
 }

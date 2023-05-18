@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class CalcHelper {
 
@@ -12,7 +13,7 @@ public class CalcHelper {
         return table;
     }
 
-    public static int[] getCharFreq(HashMap<Character, Integer> table) {
+    public static int[] getCharFreq(Map<Character, Integer> table) {
         int[] charfreq = new int[table.size()];
         int index = 0;
         for (Integer value : table.values()) {
@@ -22,7 +23,7 @@ public class CalcHelper {
         return charfreq;
     }
 
-    public static char[] getCharArr(HashMap<Character, Integer> table) {
+    public static char[] getCharArr(Map<Character, Integer> table) {
         char[] charArray = new char[table.size()];
         int index = 0;
         for (Character c : table.keySet()) {
@@ -30,5 +31,17 @@ public class CalcHelper {
             index++;
         }
         return charArray;
+    }
+
+    public static int originalBytes(String text) {
+        int numberOfBytes = 0;
+        for (Character c : text.toCharArray()) {
+            numberOfBytes++;
+        }
+        return numberOfBytes * 8;
+    }
+
+    public static int decodedBytes(byte[] bytes) {
+        return bytes.length;
     }
 }

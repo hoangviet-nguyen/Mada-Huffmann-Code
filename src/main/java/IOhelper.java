@@ -3,8 +3,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class IOhelper {
 
@@ -55,10 +54,10 @@ public class IOhelper {
         }
     }
 
-    public static byte[] readByte() {
-        File file = new File("output.dat");
+    public static byte[] readByte(String path) {
+        File file = new File(path);
         byte[] bFile = new byte[(int) file.length()];
-        FileInputStream fis = null;
+        FileInputStream fis;
         try {
             fis = new FileInputStream(file);
             fis.read(bFile);
@@ -69,12 +68,44 @@ public class IOhelper {
         return bFile;
     }
 
+    public static String convertToString(byte[] bytes) {
+        String code = "";
 
-    public static void createCodeTable(String path, HashMap<Character, String> codeTable) {
+        for (int value : bytes) {
+            code += Integer.toBinaryString((value & 0xFF) + 0x100).substring(1);
+        }
+        //tastet String von hinten nach nullen ab
+        int i = code.length() - 1;
+
+        while (i >= 0 && code.charAt(i) != '1') {
+            i--;
+        }
+        code = code.substring(0, i);
+        return code;
+    }
+
+
+
+    public static void writeTable(String path, Map<Character, String> codeTable) {
         String decTable = "";
         for (Character c : codeTable.keySet()) {
             decTable += (int) c + ":" + codeTable.get(c) + "-";
         }
-        IOhelper.writeFile(decTable.substring(0, decTable.length() - 1), path);
+        writeFile(decTable.substring(0, decTable.length() - 1), path);
+    }
+
+    public static Map<String, Character> getTableFromFile(String codeTable) throws RuntimeException {
+        String code = readFile(codeTable);
+        List<String> mapper = Arrays.stream(code.split("-")).toList();
+        List<List<String>> raw = new ArrayList<>();
+        for (String pair:mapper) {
+            raw.add(Arrays.stream(pair.split(":")).toList());
+        }
+
+        Map<String, Character> codePoint = new HashMap<>();
+        for (List pair : raw) {
+            codePoint.put((String)pair.get(1), (char) Integer.parseInt((String)pair.get(0)));
+        }
+        return codePoint;
     }
 }

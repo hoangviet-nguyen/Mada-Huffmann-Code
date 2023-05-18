@@ -1,13 +1,14 @@
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 public class main {
 
     public static void main(String[] args) {
 
-
-        HashMap<Character, Integer> table = CalcHelper.occurenceTable("text.txt");
+        //berechnet die Wahrscheinlichkeiten
+        Map<Character,Integer> table = CalcHelper.occurenceTable("text.txt");
         String text = IOhelper.readFile("text.txt");
         int n = table.size();
         char[] charArray = CalcHelper.getCharArr(table);
@@ -49,12 +50,13 @@ public class main {
 
             q.add(f);
         }
+
         System.out.println(" Charakter | Codepoint ");
         System.out.println("--------------------");
 
-        HashMap<Character, String> codeTable = Huffman.printCode(root, "", new HashMap<>());
+        Map<Character, String> codeTable = Huffman.printCode(root, "", new HashMap<>());
 
-        IOhelper.createCodeTable("dec tab.txt",codeTable);
+        IOhelper.writeTable("dec tab.txt",codeTable);
 
         String output = "";
         for (char c : text.toCharArray()) {
@@ -78,12 +80,16 @@ public class main {
         System.out.println("Encoded: " + Arrays.toString(bytes));
         String binaryString = "";
         IOhelper.writeByteToFile(bytes);
-        for (byte b : bytes) {
-            binaryString += Integer.toBinaryString((b & 0xFF) + 0x100).substring(1);
-        }
-        System.out.println("Encoded: " + binaryString);
-        String test = Huffman.getString(root, binaryString);
-        System.out.println("Decoded: " + test);
 
+        bytes = IOhelper.readByte("output-mada.dat");
+        int decoded = bytes.length;
+        binaryString = IOhelper.convertToString(bytes);
+        System.out.println(binaryString);
+        Map<String, Character> mapper = IOhelper.getTableFromFile("dec_tab-mada.txt");
+        String test = Huffman.decode(mapper,binaryString);
+        System.out.println("Decoded: " + test);
+        System.out.println("Mit Huffman verfahren: " + decoded);
+        System.out.println("Ohne Huffman verfahren: " + CalcHelper.originalBytes(test));
+        System.out.println("Einsparung = " + (double) decoded / CalcHelper.originalBytes(test));
     }
 }
