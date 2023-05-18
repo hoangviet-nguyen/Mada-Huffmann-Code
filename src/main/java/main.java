@@ -17,6 +17,7 @@ public class main {
         int n = table.size();
         char[] charArray = new char[table.size()];
         int[] charfreq = new int[table.size()];
+        Arrays.sort(charfreq);
         int index = 0;
         for (Character c : table.keySet()) {
             charArray[index] = c;
@@ -33,6 +34,7 @@ public class main {
 
         PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new NodeComparator());
 
+        // erstellen der einzelnen nodes
         for (int i = 0; i < n; i++) {
             HuffmanNode hn = new HuffmanNode();
 
@@ -47,6 +49,7 @@ public class main {
 
         HuffmanNode root = null;
 
+        //Verknüpfen von Nodes
         while (q.size() > 1) {
 
             HuffmanNode x = q.peek();
@@ -67,6 +70,6 @@ public class main {
         }
         System.out.println(" Char | Huffman code ");
         System.out.println("--------------------");
-        Huffman.printCode(root, "");
+        Huffman.printCodeTable(root, "");
     }
 }
