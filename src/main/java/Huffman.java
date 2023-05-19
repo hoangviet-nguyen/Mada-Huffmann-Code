@@ -65,7 +65,9 @@ public class Huffman {
         return decoded.toString();
     }
 
-    /**
+    /** Die Nodes wurden mithilfe von der Seite
+     * https://www.programiz.com/dsa/huffman-coding#:~:text=Huffman%20coding%20first%20creates%20a,concept%20of%20prefix%20code%20ie
+     * erstellt
      * @param charfreq  Array with frequencies of charactes
      * @param charArray Array with all distinct characters in text
      * @return root Huffman Node
