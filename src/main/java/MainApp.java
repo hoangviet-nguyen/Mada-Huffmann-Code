@@ -35,10 +35,11 @@ public class MainApp {
         String binaryString = IOhelper.convertToString(bytes);
         Map<String, Character> mapper = IOhelper.getTableFromFile("dec_tab-mada.txt");
         String test = Huffman.decode(mapper, binaryString);
-
-        System.out.println("Decoded: " + test);
-        System.out.println("Mit Huffman verfahren: " + decoded);
-        System.out.println("Ohne Huffman verfahren: " + CalcHelper.originalBytes(test));
-        System.out.println("Einsparung = " + (double) decoded / CalcHelper.originalBytes(test));
+        System.out.println("");
+        System.out.println("Decoded: \n" + test +"\n");
+        IOhelper.writeFile(test, "decoded-mada.txt"); // write decoded text to file
+        System.out.println("Mit Huffman verfahren: " + decoded +" Bytes");
+        System.out.println("Ohne Huffman verfahren: " + CalcHelper.originalBytes(test) +" Bytes");
+        System.out.println("Einsparung = " +(((1 - ((double) decoded / CalcHelper.originalBytes(test))))*100)+" %");
     }
 }
